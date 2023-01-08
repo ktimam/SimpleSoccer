@@ -597,6 +597,11 @@ int WINAPI WinMain (HINSTANCE hInstance,
 #ifdef SERVER_MODE
   while(!mMatchFinished)
   {
+      /*while (!timer.ReadyForNextFrame())
+      {
+          Sleep(2);
+      }*/
+
       IncrementTime(1);
 
       //update game states
@@ -654,7 +659,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
           }
       }
 
-      while (!timer.ReadyForNextFrame()/* && msg.message != WM_QUIT*/)
+      while (!timer.ReadyForNextFrame() && msg.message != WM_QUIT)
       {
           Sleep(2);
       }

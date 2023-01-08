@@ -13,7 +13,7 @@
 #include "Messaging/MessageDispatcher.h"
 #include "SoccerMessages.h"
 #include "TeamStates.h"
-#include "Debug/DebugConsole.h"
+//#include "Debug/DebugConsole.h"
 #include <windows.h>
 
 using std::vector;
@@ -392,7 +392,7 @@ bool SoccerTeam::isPassSafeFromAllOpponents(Vector2D                from,
   {
     if (!isPassSafeFromOpponent(from, target, receiver, *opp, PassingForce))
     {
-      debug_on
+      //debug_on
         
       return false;
     }
