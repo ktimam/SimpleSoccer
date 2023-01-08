@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Script1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\2D\Vector2d.cpp" />
+    <ClCompile Include="Common\Debug\DebugConsole.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzyModule.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzyOperators.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzySet_LeftShoulder.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzySet_RightShoulder.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzySet_Singleton.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzySet_Triangle.cpp" />
+    <ClCompile Include="Common\fuzzy\FuzzyVariable.cpp" />
+    <ClCompile Include="Common\Game\BaseGameEntity.cpp" />
+    <ClCompile Include="Common\Game\EntityManager.cpp" />
+    <ClCompile Include="Common\Messaging\MessageDispatcher.cpp" />
+    <ClCompile Include="Common\misc\Cgdi.cpp" />
+    <ClCompile Include="Common\misc\FrameCounter.cpp" />
+    <ClCompile Include="Common\misc\iniFileLoaderBase.cpp" />
+    <ClCompile Include="Common\misc\WindowUtils.cpp" />
+    <ClCompile Include="Common\Time\CrudeTimer.cpp" />
+    <ClCompile Include="Common\Time\PrecisionTimer.cpp" />
+    <ClCompile Include="SimSoccer\FieldPlayer.cpp" />
+    <ClCompile Include="SimSoccer\FieldPlayerStates.cpp" />
+    <ClCompile Include="SimSoccer\Goal.cpp" />
+    <ClCompile Include="SimSoccer\Goalkeeper.cpp" />
+    <ClCompile Include="SimSoccer\GoalKeeperStates.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SimSoccer\ParamLoader.cpp" />
+    <ClCompile Include="SimSoccer\PlayerBase.cpp" />
+    <ClCompile Include="SimSoccer\SoccerBall.cpp" />
+    <ClCompile Include="SimSoccer\SoccerMessages.cpp" />
+    <ClCompile Include="SimSoccer\SoccerPitch.cpp" />
+    <ClCompile Include="SimSoccer\SoccerTeam.cpp" />
+    <ClCompile Include="SimSoccer\SteeringBehaviors.cpp" />
+    <ClCompile Include="SimSoccer\SupportSpotCalculator.cpp" />
+    <ClCompile Include="SimSoccer\TeamStates.cpp" />
+    <ClCompile Include="Snapshot.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\2D\C2DMatrix.h" />
+    <ClInclude Include="Common\2D\geometry.h" />
+    <ClInclude Include="Common\2D\InvertedAABBox2D.h" />
+    <ClInclude Include="Common\2D\Transformations.h" />
+    <ClInclude Include="Common\2D\Vector2D.h" />
+    <ClInclude Include="Common\2D\Wall2D.h" />
+    <ClInclude Include="Common\2D\WallIntersectionTests.h" />
+    <ClInclude Include="Common\Debug\DebugConsole.h" />
+    <ClInclude Include="Common\FSM\State.h" />
+    <ClInclude Include="Common\FSM\StateMachine.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyHedges.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyModule.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyOperators.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyRule.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet_LeftShoulder.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet_RightShoulder.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet_Shoulder.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet_Singleton.h" />
+    <ClInclude Include="Common\fuzzy\FuzzySet_Triangle.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyTerm.h" />
+    <ClInclude Include="Common\fuzzy\FuzzyVariable.h" />
+    <ClInclude Include="Common\fuzzy\FzSet.h" />
+    <ClInclude Include="Common\Game\BaseGameEntity.h" />
+    <ClInclude Include="Common\Game\EntityFunctionTemplates.h" />
+    <ClInclude Include="Common\Game\EntityManager.h" />
+    <ClInclude Include="Common\Game\MovingEntity.h" />
+    <ClInclude Include="Common\Game\Region.h" />
+    <ClInclude Include="Common\Goals\Goal.h" />
+    <ClInclude Include="Common\Goals\Goal_Composite.h" />
+    <ClInclude Include="Common\Graph\AStarHeuristicPolicies.h" />
+    <ClInclude Include="Common\Graph\GraphAlgorithms.h" />
+    <ClInclude Include="Common\Graph\GraphEdgeTypes.h" />
+    <ClInclude Include="Common\Graph\GraphNodeTypes.h" />
+    <ClInclude Include="Common\Graph\HandyGraphFunctions.h" />
+    <ClInclude Include="Common\Graph\NodeTypeEnumerations.h" />
+    <ClInclude Include="Common\Graph\SparseGraph.h" />
+    <ClInclude Include="Common\json\json.hpp" />
+    <ClInclude Include="Common\Messaging\MessageDispatcher.h" />
+    <ClInclude Include="Common\Messaging\Telegram.h" />
+    <ClInclude Include="Common\misc\autolist.h" />
+    <ClInclude Include="Common\misc\CellSpacePartition.h" />
+    <ClInclude Include="Common\misc\Cgdi.h" />
+    <ClInclude Include="Common\misc\ConsoleUtils.h" />
+    <ClInclude Include="Common\misc\FrameCounter.h" />
+    <ClInclude Include="Common\misc\iniFileLoaderBase.h" />
+    <ClInclude Include="Common\misc\PriorityQueue.h" />
+    <ClInclude Include="Common\misc\Smoother.h" />
+    <ClInclude Include="Common\misc\Stream_Utility_Functions.h" />
+    <ClInclude Include="Common\misc\TypeToString.h" />
+    <ClInclude Include="Common\misc\utils.h" />
+    <ClInclude Include="Common\misc\WindowUtils.h" />
+    <ClInclude Include="Common\Time\CrudeTimer.h" />
+    <ClInclude Include="Common\Time\PrecisionTimer.h" />
+    <ClInclude Include="Common\Time\Regulator.h" />
+    <ClInclude Include="Common\Triggers\Trigger.h" />
+    <ClInclude Include="Common\Triggers\TriggerRegion.h" />
+    <ClInclude Include="Common\Triggers\TriggerSystem.h" />
+    <ClInclude Include="Common\Triggers\Trigger_LimitedLifeTime.h" />
+    <ClInclude Include="Common\Triggers\Trigger_Respawning.h" />
+    <ClInclude Include="SimSoccer\constants.h" />
+    <ClInclude Include="SimSoccer\FieldPlayer.h" />
+    <ClInclude Include="SimSoccer\FieldPlayerStates.h" />
+    <ClInclude Include="SimSoccer\Goal.h" />
+    <ClInclude Include="SimSoccer\Goalkeeper.h" />
+    <ClInclude Include="SimSoccer\GoalKeeperStates.h" />
+    <ClInclude Include="SimSoccer\ParamLoader.h" />
+    <ClInclude Include="SimSoccer\PlayerBase.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SimSoccer\SoccerBall.h" />
+    <ClInclude Include="SimSoccer\SoccerMessages.h" />
+    <ClInclude Include="SimSoccer\SoccerPitch.h" />
+    <ClInclude Include="SimSoccer\SoccerTeam.h" />
+    <ClInclude Include="SimSoccer\SteeringBehaviors.h" />
+    <ClInclude Include="SimSoccer\SupportSpotCalculator.h" />
+    <ClInclude Include="SimSoccer\TeamStates.h" />
+    <ClInclude Include="Snapshot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Params.ini" />
+    <None Include="Script1.aps" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{85f3c67a-df19-486d-9814-9e09e93bca74}</ProjectGuid>
+    <RootNamespace>SimpleSoccer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>SimSoccer;Common;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
