@@ -15,6 +15,8 @@
 //
 //------------------------------------------------------------------------
 
+#include <iostream>
+
 #include <fstream>
 #include <string>
 #include <cassert>
@@ -59,6 +61,7 @@ public:
 
   iniFileLoaderBase(const char* filename):CurrentLine(""), m_bGoodFile(true)
   {
+    std::cout << "Opening file : " << filename<< std::endl;
     file.open(filename);
 
     if (!file){m_bGoodFile = false;}

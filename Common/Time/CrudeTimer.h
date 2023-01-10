@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #ifndef CRUDETIMER_H
 #define CRUDETIMER_H
 //------------------------------------------------------------------------
@@ -43,7 +45,7 @@ public:
 
 };
 
-
+#endif
 
 
 

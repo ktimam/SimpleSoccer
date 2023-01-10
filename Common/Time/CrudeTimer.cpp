@@ -1,3 +1,4 @@
+#ifndef LINUX
 #include "CrudeTimer.h"
 
 
@@ -7,3 +8,5 @@ CrudeTimer* CrudeTimer::Instance()
 
   return &instance;
 }
+
+#endif
