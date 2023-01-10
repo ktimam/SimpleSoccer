@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 
 struct Telegram;
-#include "misc/cgdi.h"
+//#include "misc/cgdi.h"
 #include "misc/TypeToString.h"
 
 
@@ -87,10 +87,10 @@ public:
   
   //this is used to draw the name of the goal at the specific position
   //used for debugging
-  virtual void RenderAtPos(Vector2D& pos, TypeToString* tts)const;
+  //virtual void RenderAtPos(Vector2D& pos, TypeToString* tts)const;
   
   //used to render any goal specific information
-  virtual void Render(){}
+  //virtual void Render(){}
   
 };
 
@@ -118,17 +118,17 @@ void  Goal<entity_type>::ActivateIfInactive()
   }
 }
 
-template <class entity_type>
-void  Goal<entity_type>::RenderAtPos(Vector2D& pos, TypeToString* tts)const
-{
-  pos.y += 15;
-  gdi->TransparentText();
-  if (isComplete()) gdi->TextColor(0,255,0);
-  if (isInactive()) gdi->TextColor(0,0,0);
-  if (hasFailed()) gdi->TextColor(255,0,0);
-  if (isActive()) gdi->TextColor(0,0,255);
-
-  gdi->TextAtPos(pos.x, pos.y, tts->Convert(GetType())); 
-}
+//template <class entity_type>
+//void  Goal<entity_type>::RenderAtPos(Vector2D& pos, TypeToString* tts)const
+//{
+//  pos.y += 15;
+//  gdi->TransparentText();
+//  if (isComplete()) gdi->TextColor(0,255,0);
+//  if (isInactive()) gdi->TextColor(0,0,0);
+//  if (hasFailed()) gdi->TextColor(255,0,0);
+//  if (isActive()) gdi->TextColor(0,0,255);
+//
+//  gdi->TextAtPos(pos.x, pos.y, tts->Convert(GetType())); 
+//}
 
 #endif

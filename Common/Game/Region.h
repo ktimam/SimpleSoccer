@@ -14,7 +14,7 @@
 #include <math.h>
 
 #include "2D/Vector2D.h"
-#include "misc/Cgdi.h"
+//#include "misc/Cgdi.h"
 #include "misc/utils.h"
 #include "misc/Stream_Utility_Functions.h"
 
@@ -64,7 +64,7 @@ public:
 
   virtual ~Region(){}
 
-  virtual inline void     Render(bool ShowID)const;
+  //virtual inline void     Render(bool ShowID)const;
 
   //returns true if the given position lays inside the region. The
   //region modifier can be used to contract the region bounderies
@@ -81,8 +81,8 @@ public:
   double     Right()const{return m_dRight;}
   double     Width()const{return fabs(m_dRight - m_dLeft);}
   double     Height()const{return fabs(m_dTop - m_dBottom);}
-  double     Length()const{return max(Width(), Height());}
-  double     Breadth()const{return min(Width(), Height());}
+  double     Length()const{return fmax(Width(), Height());}
+  double     Breadth()const{return fmin(Width(), Height());}
 
   Vector2D  Center()const{return m_vCenter;}
   int       ID()const{return m_iID;}
@@ -115,18 +115,18 @@ inline bool Region::Inside(Vector2D pos, region_modifier r=normal)const
 
 }
 
-inline void Region::Render(bool ShowID = 0)const
-{
-  gdi->HollowBrush();
-  gdi->GreenPen();
-  gdi->Rect(m_dLeft, m_dTop, m_dRight, m_dBottom);
-
-  if (ShowID)
-  { 
-    gdi->TextColor(Cgdi::green);
-    gdi->TextAtPos(Center(), ttos(ID()));
-  }
-}
+//inline void Region::Render(bool ShowID = 0)const
+//{
+//  gdi->HollowBrush();
+//  gdi->GreenPen();
+//  gdi->Rect(m_dLeft, m_dTop, m_dRight, m_dBottom);
+//
+//  if (ShowID)
+//  { 
+//    gdi->TextColor(Cgdi::green);
+//    gdi->TextAtPos(Center(), ttos(ID()));
+//  }
+//}
 
 
 #endif

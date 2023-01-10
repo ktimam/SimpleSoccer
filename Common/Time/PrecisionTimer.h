@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #ifndef PRECISION_TIMER_H
 #define PRECISION_TIMER_H
 //-----------------------------------------------------------------------
@@ -144,6 +146,7 @@ inline double PrecisionTimer::TimeElapsed()
 
 
 
+#endif
 #endif
 
   

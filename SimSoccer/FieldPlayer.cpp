@@ -3,14 +3,14 @@
 #include "SteeringBehaviors.h"
 #include "2D/Transformations.h"
 #include "2D/Geometry.h"
-#include "misc/Cgdi.h"
+//#include "misc/Cgdi.h"
 #include "2D/C2DMatrix.h"
 #include "Goal.h"
 #include "Game/Region.h"
 #include "game/EntityFunctionTemplates.h"
 #include "ParamLoader.h"
 #include "SoccerTeam.h"
-#include "time/Regulator.h"
+//#include "time/Regulator.h"
 #include "Debug/DebugConsole.h"
 
 
@@ -22,7 +22,7 @@ using std::vector;
 //----------------------------------------------------------------------------
 FieldPlayer::~FieldPlayer()
 {
-  delete m_pKickLimiter;
+  //delete m_pKickLimiter;
   delete m_pStateMachine;
 }
 
@@ -64,7 +64,7 @@ FieldPlayer::FieldPlayer(SoccerTeam* home_team,
   m_pSteering->SeparationOn();
 
   //set up the kick regulator
-  m_pKickLimiter = new Regulator(Prm.PlayerKickFrequency);
+  //m_pKickLimiter = new Regulator(Prm.PlayerKickFrequency);
 }
 
 //------------------------------ Update ----------------------------------
@@ -139,53 +139,53 @@ bool FieldPlayer::HandleMessage(const Telegram& msg)
 //--------------------------- Render -------------------------------------
 //
 //------------------------------------------------------------------------
-void FieldPlayer::Render()                                         
-{
-  gdi->TransparentText();
-  gdi->TextColor(Cgdi::grey);
-
-  //set appropriate team color
-  if (Team()->Color() == SoccerTeam::blue){gdi->BluePen();}
-  else{gdi->RedPen();}
-
-  
-
-  //render the player's body
-  m_vecPlayerVBTrans = WorldTransform(m_vecPlayerVB,
-                                         Pos(),
-                                         Heading(),
-                                         Side(),
-                                         Scale());
-  gdi->ClosedShape(m_vecPlayerVBTrans);  
-  
-  //and 'is 'ead
-  gdi->BrownBrush();
-  if (Prm.bHighlightIfThreatened && (Team()->ControllingPlayer() == this) && isThreatened()) gdi->YellowBrush();
-  gdi->Circle(Pos(), 6);
-
-    
-  //render the state
-  if (Prm.bStates)
-  {  
-    gdi->TextColor(0, 170, 0);
-    gdi->TextAtPos(m_vPosition.x, m_vPosition.y -20, std::string(m_pStateMachine->GetNameOfCurrentState()));
-  }
-
-  //show IDs
-  if (Prm.bIDs)
-  {
-    gdi->TextColor(0, 170, 0);
-    gdi->TextAtPos(Pos().x-20, Pos().y-20, ttos(ID()));
-  }
-
-
-  if (Prm.bViewTargets)
-  {
-    gdi->RedBrush();
-    gdi->Circle(Steering()->Target(), 3);
-    gdi->TextAtPos(Steering()->Target(), ttos(ID()));
-  }   
-}
+//void FieldPlayer::Render()                                         
+//{
+//  gdi->TransparentText();
+//  gdi->TextColor(Cgdi::grey);
+//
+//  //set appropriate team color
+//  if (Team()->Color() == SoccerTeam::blue){gdi->BluePen();}
+//  else{gdi->RedPen();}
+//
+//  
+//
+//  //render the player's body
+//  m_vecPlayerVBTrans = WorldTransform(m_vecPlayerVB,
+//                                         Pos(),
+//                                         Heading(),
+//                                         Side(),
+//                                         Scale());
+//  gdi->ClosedShape(m_vecPlayerVBTrans);  
+//  
+//  //and 'is 'ead
+//  gdi->BrownBrush();
+//  if (Prm.bHighlightIfThreatened && (Team()->ControllingPlayer() == this) && isThreatened()) gdi->YellowBrush();
+//  gdi->Circle(Pos(), 6);
+//
+//    
+//  //render the state
+//  if (Prm.bStates)
+//  {  
+//    gdi->TextColor(0, 170, 0);
+//    gdi->TextAtPos(m_vPosition.x, m_vPosition.y -20, std::string(m_pStateMachine->GetNameOfCurrentState()));
+//  }
+//
+//  //show IDs
+//  if (Prm.bIDs)
+//  {
+//    gdi->TextColor(0, 170, 0);
+//    gdi->TextAtPos(Pos().x-20, Pos().y-20, ttos(ID()));
+//  }
+//
+//
+//  if (Prm.bViewTargets)
+//  {
+//    gdi->RedBrush();
+//    gdi->Circle(Steering()->Target(), 3);
+//    gdi->TextAtPos(Steering()->Target(), ttos(ID()));
+//  }   
+//}
 
 
 

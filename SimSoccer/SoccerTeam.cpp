@@ -14,7 +14,7 @@
 #include "SoccerMessages.h"
 #include "TeamStates.h"
 //#include "Debug/DebugConsole.h"
-#include <windows.h>
+//#include <windows.h>
 
 using std::vector;
 
@@ -477,88 +477,88 @@ void SoccerTeam::ReturnAllFieldPlayersToHome()const
 //
 //  renders the players and any team related info
 //------------------------------------------------------------------------
-void SoccerTeam::Render()const
-{
-  std::vector<PlayerBase*>::const_iterator it = m_Players.begin();
-
-  for (it; it != m_Players.end(); ++it)
-  {
-    (*it)->Render();
-  }
-
-  //show the controlling team and player at the top of the display
-  if (Prm.bShowControllingTeam)
-  {
-    gdi->TextColor(Cgdi::white);
-    
-    if ( (Color() == blue) && InControl())
-    {
-      gdi->TextAtPos(20,3,"Blue in Control");
-    }
-    else if ( (Color() == red) && InControl())
-    {
-      gdi->TextAtPos(20,3,"Red in Control");
-    }
-    if (m_pControllingPlayer != NULL)
-    {
-      gdi->TextAtPos(Pitch()->cxClient()-150, 3, "Controlling Player: " + ttos(m_pControllingPlayer->ID()));
-    }
-  }
-
-  //render the sweet spots
-  if (Prm.bSupportSpots && InControl())
-  {
-    m_pSupportSpotCalc->Render();
-  }
-
-//#define SHOW_TEAM_STATE
-#ifdef SHOW_TEAM_STATE
-  if (Color() == red)
-  {
-    gdi->TextColor(Cgdi::white);
-
-    if (CurrentState() == Attacking::Instance())
-    {
-      gdi->TextAtPos(160, 20, "Attacking");
-    }
-    if (CurrentState() == Defending::Instance())
-    {
-      gdi->TextAtPos(160, 20, "Defending");
-    }
-    if (CurrentState() == PrepareForKickOff::Instance())
-    {
-      gdi->TextAtPos(160, 20, "Kickoff");
-    }
-  }
-  else
-  {
-    if (CurrentState() == Attacking::Instance())
-    {
-      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Attacking");
-    }
-    if (CurrentState() == Defending::Instance())
-    {
-      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Defending");
-    }
-    if (CurrentState() == PrepareForKickOff::Instance())
-    {
-      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Kickoff");
-    }
-  }
-#endif
-
-//#define SHOW_SUPPORTING_PLAYERS_TARGET
-#ifdef SHOW_SUPPORTING_PLAYERS_TARGET
-  if (m_pSupportingPlayer)
-  {
-    gdi->BlueBrush();
-    gdi->RedPen();
-    gdi->Circle(m_pSupportingPlayer->Steering()->Target(), 4);
-
-  }
-#endif
-
-}
+//void SoccerTeam::Render()const
+//{
+//  std::vector<PlayerBase*>::const_iterator it = m_Players.begin();
+//
+//  for (it; it != m_Players.end(); ++it)
+//  {
+//    (*it)->Render();
+//  }
+//
+//  //show the controlling team and player at the top of the display
+//  if (Prm.bShowControllingTeam)
+//  {
+//    gdi->TextColor(Cgdi::white);
+//    
+//    if ( (Color() == blue) && InControl())
+//    {
+//      gdi->TextAtPos(20,3,"Blue in Control");
+//    }
+//    else if ( (Color() == red) && InControl())
+//    {
+//      gdi->TextAtPos(20,3,"Red in Control");
+//    }
+//    if (m_pControllingPlayer != NULL)
+//    {
+//      gdi->TextAtPos(Pitch()->cxClient()-150, 3, "Controlling Player: " + ttos(m_pControllingPlayer->ID()));
+//    }
+//  }
+//
+//  //render the sweet spots
+//  if (Prm.bSupportSpots && InControl())
+//  {
+//    m_pSupportSpotCalc->Render();
+//  }
+//
+////#define SHOW_TEAM_STATE
+//#ifdef SHOW_TEAM_STATE
+//  if (Color() == red)
+//  {
+//    gdi->TextColor(Cgdi::white);
+//
+//    if (CurrentState() == Attacking::Instance())
+//    {
+//      gdi->TextAtPos(160, 20, "Attacking");
+//    }
+//    if (CurrentState() == Defending::Instance())
+//    {
+//      gdi->TextAtPos(160, 20, "Defending");
+//    }
+//    if (CurrentState() == PrepareForKickOff::Instance())
+//    {
+//      gdi->TextAtPos(160, 20, "Kickoff");
+//    }
+//  }
+//  else
+//  {
+//    if (CurrentState() == Attacking::Instance())
+//    {
+//      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Attacking");
+//    }
+//    if (CurrentState() == Defending::Instance())
+//    {
+//      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Defending");
+//    }
+//    if (CurrentState() == PrepareForKickOff::Instance())
+//    {
+//      gdi->TextAtPos(160, Pitch()->cyClient()-40, "Kickoff");
+//    }
+//  }
+//#endif
+//
+////#define SHOW_SUPPORTING_PLAYERS_TARGET
+//#ifdef SHOW_SUPPORTING_PLAYERS_TARGET
+//  if (m_pSupportingPlayer)
+//  {
+//    gdi->BlueBrush();
+//    gdi->RedPen();
+//    gdi->Circle(m_pSupportingPlayer->Steering()->Target(), 4);
+//
+//  }
+//#endif
+//
+//}
 
 //------------------------- CreatePlayers --------------------------------
 //

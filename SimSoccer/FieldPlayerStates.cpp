@@ -108,10 +108,12 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
       //get the position of the player requesting the pass 
       FieldPlayer* receiver = static_cast<FieldPlayer*>(telegram.ExtraInfo);
 
+#ifndef LINUX
       #ifdef PLAYER_STATE_INFO_ON
       debug_con << "Player " << player->ID() << " received request from " <<
                     receiver->ID() << " to make pass" << "";
       #endif
+#endif
 
       //if the ball is not within kicking range or their is already a 
       //receiving player, this player cannot pass the ball to the player
@@ -119,9 +121,11 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
       if (player->Team()->Receiver() != NULL ||
          !player->BallWithinKickingRange() )
       {
+#ifndef LINUX
         #ifdef PLAYER_STATE_INFO_ON
         debug_con << "Player " << player->ID() << " cannot make requested pass <cannot kick ball>" << "";
         #endif
+#endif
 
         return true;
       }
@@ -130,10 +134,12 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
       player->Ball()->Kick(receiver->Pos() - player->Ball()->Pos(),
                            Prm.MaxPassingForce);
 
-          
+         
+#ifndef LINUX
      #ifdef PLAYER_STATE_INFO_ON
      debug_con << "Player " << player->ID() << " Passed ball to requesting player" << "";
      #endif
+#endif
         
      Vector2D pos = Vector2D(receiver->Pos());
       //let the receiver know a pass is coming 
@@ -177,9 +183,11 @@ void ChaseBall::Enter(FieldPlayer* player)
 {
   player->Steering()->SeekOn();
 
+#ifndef LINUX
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters chase state" << "";
   #endif
+#endif
 }
 
 void ChaseBall::Execute(FieldPlayer* player)                                     
@@ -230,9 +238,11 @@ void SupportAttacker::Enter(FieldPlayer* player)
 
   player->Steering()->SetTarget(player->Team()->GetSupportSpot());
   
+#ifndef LINUX
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters support state" << "";
   #endif
+#endif
 }
 
 void SupportAttacker::Execute(FieldPlayer* player)                                     
@@ -313,9 +323,11 @@ void ReturnToHomeRegion::Enter(FieldPlayer* player)
     player->Steering()->SetTarget(player->HomeRegion()->Center());
   }
 
+#ifndef LINUX
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters ReturnToHome state" << "";
   #endif
+#endif
 }
 
 void ReturnToHomeRegion::Execute(FieldPlayer* player)
@@ -372,9 +384,11 @@ Wait* Wait::Instance()
 
 void Wait::Enter(FieldPlayer* player)
 {
+#ifndef LINUX
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters wait state" << "";
   #endif
+#endif
 
   //if the game is not on make sure the target is the center of the player's
   //home region. This is ensure all the players are in the correct positions
@@ -458,10 +472,11 @@ void KickBall::Enter(FieldPlayer* player)
      player->GetFSM()->ChangeState(ChaseBall::Instance());
    }
 
-   
+#ifndef LINUX
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters kick state" << "";
   #endif
+#endif
 }
 
 void KickBall::Execute(FieldPlayer* player)
@@ -478,9 +493,11 @@ void KickBall::Execute(FieldPlayer* player)
       player->Pitch()->GoalKeeperHasBall() ||
       (dot < 0) ) 
   {
+#ifndef LINUX
     #ifdef PLAYER_STATE_INFO_ON
     debug_con << "Goaly has ball / ball behind player" << "";
     #endif
+#endif
     
     player->GetFSM()->ChangeState(ChaseBall::Instance());
 
@@ -505,9 +522,11 @@ void KickBall::Execute(FieldPlayer* player)
                                BallTarget)                   || 
      (RandFloat() < Prm.ChancePlayerAttemptsPotShot))
   {
+#ifndef LINUX
    #ifdef PLAYER_STATE_INFO_ON
    debug_con << "Player " << player->ID() << " attempts a shot at " << BallTarget << "";
    #endif
+#endif
 
    //add some noise to the kick. We don't want players who are 
    //too accurate! The amount of noise can be adjusted by altering
@@ -550,10 +569,12 @@ void KickBall::Execute(FieldPlayer* player)
    
     player->Ball()->Kick(KickDirection, power);
 
+#ifndef LINUX
     #ifdef PLAYER_STATE_INFO_ON
     debug_con << "Player " << player->ID() << " passes the ball with force " << power << "  to player " 
               << receiver->ID() << "  Target is " << BallTarget << "";
     #endif
+#endif
 
     
     //let the receiver know a pass is coming 
@@ -598,9 +619,11 @@ void Dribble::Enter(FieldPlayer* player)
   //let the team know this player is controlling
   player->Team()->SetControllingPlayer(player);
 
+#ifndef LINUX
 #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters dribble state" << "";
   #endif
+#endif
 }
 
 void Dribble::Execute(FieldPlayer* player)
@@ -680,17 +703,21 @@ void ReceiveBall::Enter(FieldPlayer* player)
   {
     player->Steering()->ArriveOn();
     
+#ifndef LINUX
     #ifdef PLAYER_STATE_INFO_ON
     debug_con << "Player " << player->ID() << " enters receive state (Using Arrive)" << "";
     #endif
+#endif
   }
   else
   {
     player->Steering()->PursuitOn();
 
+#ifndef LINUX
     #ifdef PLAYER_STATE_INFO_ON
     debug_con << "Player " << player->ID() << " enters receive state (Using Pursuit)" << "";
     #endif
+#endif
   }
 }
 

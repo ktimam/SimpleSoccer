@@ -5,7 +5,7 @@
 #include "2D/Transformations.h"
 #include "2D/Geometry.h"
 #include "SoccerTeam.h"
-#include "Debug/DebugConsole.h"
+//#include "Debug/DebugConsole.h"
 #include "Game/EntityManager.h"
 #include "ParamLoader.h"
 #include "PlayerBase.h"
@@ -148,63 +148,63 @@ void SoccerPitch::CreateRegions(double width, double height)
 
 //------------------------------ Render ----------------------------------
 //------------------------------------------------------------------------
-bool SoccerPitch::Render()
-{
-  //draw the grass
-  gdi->DarkGreenPen();
-  gdi->DarkGreenBrush();
-  gdi->Rect(0,0,m_cxClient, m_cyClient);
-
-  //render regions
-  if (Prm.bRegions)
-  {   
-    for (unsigned int r=0; r<m_Regions.size(); ++r)
-    {
-      m_Regions[r]->Render(true);
-    }
-  }
-  
-  //render the goals
-  gdi->HollowBrush();
-  gdi->RedPen();
-  gdi->Rect(m_pPlayingArea->Left(), (m_cyClient-Prm.GoalWidth)/2, m_pPlayingArea->Left()+40, m_cyClient - (m_cyClient-Prm.GoalWidth)/2);
-
-  gdi->BluePen();
-  gdi->Rect(m_pPlayingArea->Right(), (m_cyClient-Prm.GoalWidth)/2, m_pPlayingArea->Right()-40, m_cyClient - (m_cyClient-Prm.GoalWidth)/2);
-  
-  //render the pitch markings
-  gdi->WhitePen();
-  gdi->Circle(m_pPlayingArea->Center(), m_pPlayingArea->Width() * 0.125);
-  gdi->Line(m_pPlayingArea->Center().x, m_pPlayingArea->Top(), m_pPlayingArea->Center().x, m_pPlayingArea->Bottom());
-  gdi->WhiteBrush();
-  gdi->Circle(m_pPlayingArea->Center(), 2.0);
-
-
-  //the ball
-  gdi->WhitePen();
-  gdi->WhiteBrush();
-  m_pBall->Render();
-  
-  //Render the teams
-  m_pRedTeam->Render();
-  m_pBlueTeam->Render(); 
-
-  //render the walls
-  gdi->WhitePen();
-  for (unsigned int w=0; w<m_vecWalls.size(); ++w)
-  {
-    m_vecWalls[w].Render();
-  }
-
-  //show the score
-  gdi->TextColor(Cgdi::red);
-  gdi->TextAtPos((m_cxClient/2)-50, m_cyClient-18, "Red: " + ttos(m_pBlueGoal->NumGoalsScored()));
-
-  gdi->TextColor(Cgdi::blue);
-  gdi->TextAtPos((m_cxClient/2)+10, m_cyClient-18, "Blue: " + ttos(m_pRedGoal->NumGoalsScored()));
-
-  return true;  
-}
+//bool SoccerPitch::Render()
+//{
+//  //draw the grass
+//  gdi->DarkGreenPen();
+//  gdi->DarkGreenBrush();
+//  gdi->Rect(0,0,m_cxClient, m_cyClient);
+//
+//  //render regions
+//  if (Prm.bRegions)
+//  {   
+//    for (unsigned int r=0; r<m_Regions.size(); ++r)
+//    {
+//      m_Regions[r]->Render(true);
+//    }
+//  }
+//  
+//  //render the goals
+//  gdi->HollowBrush();
+//  gdi->RedPen();
+//  gdi->Rect(m_pPlayingArea->Left(), (m_cyClient-Prm.GoalWidth)/2, m_pPlayingArea->Left()+40, m_cyClient - (m_cyClient-Prm.GoalWidth)/2);
+//
+//  gdi->BluePen();
+//  gdi->Rect(m_pPlayingArea->Right(), (m_cyClient-Prm.GoalWidth)/2, m_pPlayingArea->Right()-40, m_cyClient - (m_cyClient-Prm.GoalWidth)/2);
+//  
+//  //render the pitch markings
+//  gdi->WhitePen();
+//  gdi->Circle(m_pPlayingArea->Center(), m_pPlayingArea->Width() * 0.125);
+//  gdi->Line(m_pPlayingArea->Center().x, m_pPlayingArea->Top(), m_pPlayingArea->Center().x, m_pPlayingArea->Bottom());
+//  gdi->WhiteBrush();
+//  gdi->Circle(m_pPlayingArea->Center(), 2.0);
+//
+//
+//  //the ball
+//  gdi->WhitePen();
+//  gdi->WhiteBrush();
+//  m_pBall->Render();
+//  
+//  //Render the teams
+//  m_pRedTeam->Render();
+//  m_pBlueTeam->Render(); 
+//
+//  //render the walls
+//  gdi->WhitePen();
+//  for (unsigned int w=0; w<m_vecWalls.size(); ++w)
+//  {
+//    m_vecWalls[w].Render();
+//  }
+//
+//  //show the score
+//  gdi->TextColor(Cgdi::red);
+//  gdi->TextAtPos((m_cxClient/2)-50, m_cyClient-18, "Red: " + ttos(m_pBlueGoal->NumGoalsScored()));
+//
+//  gdi->TextColor(Cgdi::blue);
+//  gdi->TextAtPos((m_cxClient/2)+10, m_cyClient-18, "Blue: " + ttos(m_pRedGoal->NumGoalsScored()));
+//
+//  return true;  
+//}
 
 
 

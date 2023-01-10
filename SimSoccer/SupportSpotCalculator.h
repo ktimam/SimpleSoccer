@@ -16,7 +16,7 @@
 
 #include "Game/Region.h"
 #include "2D/Vector2D.h"
-#include "misc/Cgdi.h"
+//#include "misc/Cgdi.h"
 
 
 class PlayerBase;
@@ -58,7 +58,7 @@ private:
 
   //this will regulate how often the spots are calculated (default is
   //one update per second)
-  Regulator*                m_pRegulator;
+  //Regulator*                m_pRegulator;
 
 public:
   
@@ -71,7 +71,7 @@ public:
   //draws the spots to the screen as a hollow circles. The higher the 
   //score, the bigger the circle. The best supporting spot is drawn in
   //bright green.
-  void       Render()const;
+  //void       Render()const;
 
   const std::vector<SupportSpot>& SupportSpots()const { return m_Spots; }
   const SupportSpot* BestSupportingSpot()const { return m_pBestSupportingSpot; }

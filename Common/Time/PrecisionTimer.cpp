@@ -1,3 +1,4 @@
+#ifndef LINUX
 #include "Time/PrecisionTimer.h"
 
 
@@ -75,3 +76,4 @@ void PrecisionTimer::Start()
   return;
 }
 
+#endif

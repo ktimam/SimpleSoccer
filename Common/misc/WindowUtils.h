@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #ifndef WINDOW_UTILS_H
 #define WINDOW_UTILS_H
 #pragma warning (disable:4786)
@@ -78,5 +80,7 @@ int  GetWindowWidth(HWND hwnd);
 
 
 
+
+#endif
 
 #endif

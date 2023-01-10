@@ -10,7 +10,10 @@
 //
 //------------------------------------------------------------------------
 #include <math.h>
+#ifndef LINUX
 #include <windows.h>
+#endif // !LINUX
+
 #include <iosfwd>
 #include <limits>
 #include "misc/utils.h"
@@ -298,7 +301,7 @@ inline double Vec2DLengthSq(const Vector2D& v)
   return (v.x*v.x + v.y*v.y);
 }
 
-
+#ifndef LINUX
 inline Vector2D POINTStoVector(const POINTS& p)
 {
   return Vector2D(p.x, p.y);
@@ -326,7 +329,7 @@ inline POINT VectorToPOINT(const Vector2D& v)
 
   return p;
 }
-
+#endif
 
 
 //------------------------------------------------------------------------operator overloads

@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #ifndef CGDI_H
 #define CGDI_H
 //------------------------------------------------------------------------
@@ -386,5 +388,7 @@ public:
     }//end switch
   }
 };
+
+#endif
 
 #endif

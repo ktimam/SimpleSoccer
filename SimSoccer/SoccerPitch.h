@@ -13,7 +13,7 @@
 //  Author: Mat Buckland 2003 (fup@ai-junkie.com)
 //
 //------------------------------------------------------------------------
-#include <windows.h>
+//#include <windows.h>
 #include <vector>
 #include <cassert>
 
@@ -78,7 +78,7 @@ public:
 
   void  Update();
 
-  bool  Render();
+  //bool  Render();
 
   void  TogglePause(){m_bPaused = !m_bPaused;}
   bool  Paused()const{return m_bPaused;}

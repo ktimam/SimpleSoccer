@@ -11,7 +11,7 @@
 //
 //------------------------------------------------------------------------
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
 #include <string>
 
 
@@ -130,8 +130,8 @@ public:
 
   //renders visual aids and info for seeing how each behavior is
   //calculated
-  void      RenderInfo();
-  void      RenderAids();
+  //void      RenderInfo();
+  //void      RenderAids();
 
   Vector2D  Target()const{return m_vTarget;}
   void      SetTarget(const Vector2D t){m_vTarget = t;}

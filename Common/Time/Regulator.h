@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #ifndef REGULATOR
 #define REGULATOR
 //------------------------------------------------------------------------
@@ -87,5 +89,7 @@ public:
 };
 
 
+
+#endif
 
 #endif

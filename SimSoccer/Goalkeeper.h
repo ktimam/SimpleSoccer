@@ -47,7 +47,7 @@ public:
 
    //these must be implemented
    void        Update();
-   void        Render();
+   //void        Render();
    bool        HandleMessage(const Telegram& msg);
 
 

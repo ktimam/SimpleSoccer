@@ -1,3 +1,5 @@
+#ifndef LINUX
+
 #pragma warning (disable:4786)
 #include <windows.h>
 #include <time.h>
@@ -101,7 +103,14 @@ bool RenderSoccerPitch()
     {
         for (unsigned int r = 0; r < g_SoccerPitch->Regions().size(); ++r)
         {
-            g_SoccerPitch->Regions()[r]->Render(true);
+            //g_SoccerPitch->Regions()[r]->Render(true);
+
+            gdi->HollowBrush();
+            gdi->GreenPen();
+            gdi->Rect(g_SoccerPitch->Regions()[r]->Left(), g_SoccerPitch->Regions()[r]->Top(), g_SoccerPitch->Regions()[r]->Right(), g_SoccerPitch->Regions()[r]->Bottom());
+            
+            gdi->TextColor(Cgdi::green);
+            gdi->TextAtPos(g_SoccerPitch->Regions()[r]->Center(), ttos(g_SoccerPitch->Regions()[r]->ID()));
         }
     }
 
@@ -219,9 +228,19 @@ bool RenderSoccerPitch()
 
     //render the walls
     gdi->WhitePen();
+    bool RenderNormals = false;
     for (unsigned int w = 0; w < g_SoccerPitch->Walls().size(); ++w)
     {
-        g_SoccerPitch->Walls()[w].Render();
+        gdi->Line(g_SoccerPitch->Walls()[w].From(), g_SoccerPitch->Walls()[w].To());
+
+        //render the normals if rqd
+        if (RenderNormals)
+        {
+            int MidX = (int)((g_SoccerPitch->Walls()[w].From().x+ g_SoccerPitch->Walls()[w].To().x)/2);
+            int MidY = (int)((g_SoccerPitch->Walls()[w].From().y+ g_SoccerPitch->Walls()[w].To().y)/2);
+
+            gdi->Line(MidX, MidY, (int)(MidX+(g_SoccerPitch->Walls()[w].Normal().x * 5)), (int)(MidY+(g_SoccerPitch->Walls()[w].Normal().y * 5)));
+        }
     }
     gdi->TextColor(Cgdi::black);
     gdi->TextAtPos((g_SoccerPitch->cxClient() / 2) + 50, g_SoccerPitch->cyClient() - 18, GetCurrentTimeString());
@@ -685,3 +704,4 @@ int WINAPI WinMain (HINSTANCE hInstance,
   return msg.wParam;
 }
 
+#endif
