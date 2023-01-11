@@ -27,8 +27,7 @@ class ParamLoader : public iniFileLoaderBase
 private:
 
   ParamLoader():iniFileLoaderBase("Params.ini")
-  {
-    std::cout << "File Opened." << std::endl;
+  {    
        
     GoalWidth                   = GetNextParameterDouble(); 
     
@@ -40,8 +39,6 @@ private:
     Spot_DistFromControllingPlayerScore     = GetNextParameterDouble();
     Spot_ClosenessToSupportingPlayerScore  = GetNextParameterDouble();
     Spot_AheadOfAttackerScore              = GetNextParameterDouble();
-
-    std::cout << "Spot_AheadOfAttackerScore : " << Spot_AheadOfAttackerScore << std::endl;
 
     SupportSpotUpdateFreq       = GetNextParameterDouble(); 
     

@@ -4,6 +4,8 @@ TARGET_EXEC := final_program
 BUILD_DIR := ./build
 SRC_DIRS := ./src
 
+#COPY_FILES = $(BUILD_DIR)/Params.ini
+
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
 SRCS := $(shell find . -type d \( -path ./.git -o -path ./.vs -o -path ./x64 -o -path ./build -o -path ./Common/lua-5.0 -o -path ./Common/luabind \) -prune -o -name '*.cpp' -print)
@@ -27,6 +29,7 @@ CPPFLAGS := $(INC_FLAGS) -MMD -MP  -D LINUX
 
 # The final build step.
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+	tr -d '\15\32' < Params.ini > $(BUILD_DIR)/Params.ini
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
 # Build step for C source
@@ -39,7 +42,11 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	mkdir -p $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-
+#copy ini files (not working)
+$(BUILD_DIR)/Params.ini: Params.ini
+	@echo "Copying file"
+	tr -d '\15\32' < $< > $@
+	
 .PHONY: clean
 clean:
 	rm -r $(BUILD_DIR)

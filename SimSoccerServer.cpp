@@ -75,7 +75,7 @@ int main()
 
     int updates_count = 0;
 
-    std::cout << "Starting Match" << std::endl;
+    std::cout << "Starting Match..." << std::endl;
     while (!mMatchFinished)
     {
         IncrementTime(1);
