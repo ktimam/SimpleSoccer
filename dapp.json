@@ -1,0 +1,5 @@
+{
+  "fs": {
+    "files": ["match-backend", "entrypoint.sh"]
+  }
+}
