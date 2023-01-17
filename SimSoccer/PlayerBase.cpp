@@ -10,7 +10,7 @@
 #include "SoccerMessages.h"
 #include "SoccerTeam.h"
 #include "ParamLoader.h"
-#include "Goal.h"
+#include "FieldGoal.h"
 #include "SoccerBall.h"
 #include "SoccerPitch.h"
 #include "Debug/DebugConsole.h"

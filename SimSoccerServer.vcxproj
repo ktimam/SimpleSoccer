@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>Common;SimSoccer;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -149,7 +151,7 @@
     <ClCompile Include="SimSoccerServer.cpp" />
     <ClCompile Include="SimSoccer\FieldPlayer.cpp" />
     <ClCompile Include="SimSoccer\FieldPlayerStates.cpp" />
-    <ClCompile Include="SimSoccer\Goal.cpp" />
+    <ClCompile Include="SimSoccer\FieldGoal.cpp" />
     <ClCompile Include="SimSoccer\Goalkeeper.cpp" />
     <ClCompile Include="SimSoccer\GoalKeeperStates.cpp" />
     <ClCompile Include="SimSoccer\ParamLoader.cpp" />
@@ -226,7 +228,7 @@
     <ClInclude Include="SimSoccer\constants.h" />
     <ClInclude Include="SimSoccer\FieldPlayer.h" />
     <ClInclude Include="SimSoccer\FieldPlayerStates.h" />
-    <ClInclude Include="SimSoccer\Goal.h" />
+    <ClInclude Include="SimSoccer\FieldGoal.h" />
     <ClInclude Include="SimSoccer\Goalkeeper.h" />
     <ClInclude Include="SimSoccer\GoalKeeperStates.h" />
     <ClInclude Include="SimSoccer\ParamLoader.h" />

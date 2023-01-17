@@ -1,8 +1,8 @@
-#ifndef GOAL_H
-#define GOAL_H
+#ifndef FIELDGOAL_H
+#define FIELDGOAL_H
 //------------------------------------------------------------------------
 //
-//Name:   Goal.h
+//Name:   FieldGoal.h
 //
 //Desc:   class to define a goal for a soccer pitch. The goal is defined
 //        by two 2D vectors representing the left and right posts.
@@ -19,7 +19,7 @@
 
 
 
-class Goal 
+class FieldGoal 
 {
 
 private:
@@ -38,7 +38,7 @@ private:
 
 public:
 
-  Goal(Vector2D left, Vector2D right, Vector2D facing):m_vLeftPost(left),
+  FieldGoal(Vector2D left, Vector2D right, Vector2D facing):m_vLeftPost(left),
                                                        m_vRightPost(right),
                                                        m_vCenter((left+right)/2.0),
                                                        m_iNumGoalsScored(0),
@@ -63,7 +63,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////
 
-bool Goal::Scored(const SoccerBall*const ball)
+bool FieldGoal::Scored(const SoccerBall*const ball)
 {
   if (LineIntersection2D(ball->Pos(), ball->OldPos(), m_vLeftPost, m_vRightPost))
   {

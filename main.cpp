@@ -321,7 +321,7 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 			   cyClient = rect.bottom;
 
          //seed random number generator
-         srand((unsigned) time(0));
+         srand(2000);// (unsigned)time(0));
 
          
          //---------------create a surface to render to(backbuffer)

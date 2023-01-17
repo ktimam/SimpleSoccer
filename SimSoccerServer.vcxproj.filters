@@ -27,7 +27,7 @@
     <ClCompile Include="SimSoccer\FieldPlayerStates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimSoccer\Goal.cpp">
+    <ClCompile Include="SimSoccer\FieldGoal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimSoccer\Goalkeeper.cpp">
@@ -125,7 +125,7 @@
     <ClInclude Include="SimSoccer\FieldPlayerStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimSoccer\Goal.h">
+    <ClInclude Include="SimSoccer\FieldGoal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimSoccer\Goalkeeper.h">

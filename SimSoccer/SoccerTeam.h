@@ -21,7 +21,7 @@
 #include "SupportSpotCalculator.h"
 #include "FSM/StateMachine.h"
 
-class Goal;
+class FieldGoal;
 class PlayerBase;
 class FieldPlayer;
 class SoccerPitch;
@@ -53,8 +53,8 @@ private:
   SoccerPitch*              m_pPitch;
 
   //pointers to the goals
-  Goal*                     m_pOpponentsGoal;
-  Goal*                     m_pHomeGoal;
+  FieldGoal*                     m_pOpponentsGoal;
+  FieldGoal*                     m_pHomeGoal;
   
   //a pointer to the opposing team
   SoccerTeam*               m_pOpponents;
@@ -82,8 +82,8 @@ private:
 
 public:
 
-  SoccerTeam(Goal*        home_goal,
-             Goal*        opponents_goal,
+  SoccerTeam(FieldGoal*        home_goal,
+             FieldGoal*        opponents_goal,
              SoccerPitch* pitch,
              team_color   color);
 
@@ -162,8 +162,8 @@ public:
 
   StateMachine<SoccerTeam>* GetFSM()const{return m_pStateMachine;}
   
-  Goal*const           HomeGoal()const{return m_pHomeGoal;}
-  Goal*const           OpponentsGoal()const{return m_pOpponentsGoal;}
+  FieldGoal*const           HomeGoal()const{return m_pHomeGoal;}
+  FieldGoal*const           OpponentsGoal()const{return m_pOpponentsGoal;}
 
   SoccerPitch*const    Pitch()const{return m_pPitch;}           
 

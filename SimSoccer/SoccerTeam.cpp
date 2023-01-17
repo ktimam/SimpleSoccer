@@ -1,6 +1,6 @@
 #include "SoccerTeam.h"
 #include "SoccerPitch.h"
-#include "Goal.h"
+#include "FieldGoal.h"
 #include "PlayerBase.h"
 #include "GoalKeeper.h"
 #include "FieldPlayer.h"
@@ -22,8 +22,8 @@ using std::vector;
 //----------------------------- ctor -------------------------------------
 //
 //------------------------------------------------------------------------
-SoccerTeam::SoccerTeam(Goal*        home_goal,
-                       Goal*        opponents_goal,
+SoccerTeam::SoccerTeam(FieldGoal*        home_goal,
+                       FieldGoal*        opponents_goal,
                        SoccerPitch* pitch,
                        team_color   color):m_pOpponentsGoal(opponents_goal),
                                            m_pHomeGoal(home_goal),

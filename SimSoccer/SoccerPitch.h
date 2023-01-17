@@ -22,7 +22,7 @@
 #include "constants.h"
 
 class Region;
-class Goal;
+class FieldGoal;
 class SoccerTeam;
 class SoccerBall;
 class SoccerTeam;
@@ -38,8 +38,8 @@ public:
   SoccerTeam*          m_pRedTeam;
   SoccerTeam*          m_pBlueTeam;
 
-  Goal*                m_pRedGoal;
-  Goal*                m_pBlueGoal;
+  FieldGoal*                m_pRedGoal;
+  FieldGoal*                m_pBlueGoal;
    
   //container for the boundary walls
   std::vector<Wall2D>  m_vecWalls;

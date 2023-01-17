@@ -1,6 +1,7 @@
 // SimSoccerServer.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include <stdio.h>
 #include <iostream>
 
 #include "constants.h"
@@ -11,14 +12,11 @@
 #include "SoccerTeam.h"
 #include "Goalkeeper.h"
 #include "FieldPlayer.h"
+#include "FieldGoal.h"
 #include "SteeringBehaviors.h"
-#include "Snapshot.h"
 #include "json/json.hpp"
-#include "misc/Cgdi.h"
 #include "ParamLoader.h"
 #include "Resource.h"
-#include "misc/WindowUtils.h"
-#include "debug/DebugConsole.h"
 
 #include "3rdparty/cpp-httplib/httplib.h"
 #include "3rdparty/picojson/picojson.h"
@@ -38,8 +36,6 @@ int mTickCount = 0;
 bool mMatchFinished = false;
 
 SoccerPitch* g_SoccerPitch;
-Snapshot* g_MatchReplay;
-json         g_LastSnapshot;
 
 void IncrementTime(int rate)
 {
@@ -61,13 +57,47 @@ std::string GetCurrentTimeString()
     std::string time = stringStream.str();
     return time;
 }
-
 std::string handle_advance(httplib::Client& cli, picojson::value data) {
     std::cout << "Received advance request data " << data << std::endl;
     std::cout << "Adding notice" << std::endl;
     auto payload = data.get("payload").get<std::string>();
-    auto notice = std::string("{\"payload\":\"") + payload + std::string("\"}");
-    auto r = cli.Post("/notice", notice, "application/json");
+    auto payloadstr = hex_to_string(payload.substr(2, payload.length() - 1));
+    std::cout << "payloadstr : " << payloadstr << std::endl;
+
+    auto seed = (unsigned)time(0);
+    //seed random number generator
+    srand(seed);
+
+    std::cout << "Creating Pitch" << std::endl;
+
+    g_SoccerPitch = new SoccerPitch(684, 341);
+
+    std::cout << "Starting Match..." << std::endl;
+    while (!mMatchFinished)
+    {
+        IncrementTime(1);
+        //update game states
+        g_SoccerPitch->Update();
+    }
+
+    auto score1 = g_SoccerPitch->HomeTeam()->OpponentsGoal()->NumGoalsScored();
+    auto score2 = g_SoccerPitch->AwayTeam()->OpponentsGoal()->NumGoalsScored();
+    delete g_SoccerPitch;
+
+    json result;
+    result["seed"]   = seed;
+    result["score1"] = score1;
+    result["score2"] = score2;
+
+    auto resulthex = to_hex_dump(result.dump());
+    auto resultstr = std::string("\"") + std::string(resulthex) + std::string("\"");
+    std::cout << "result : " << result.dump() << std::endl;
+    std::cout << "resulthex : " << resulthex << std::endl;
+
+    json notice;
+    notice["payload"] = resulthex;
+    std::cout << "notice : " << notice.dump() << std::endl;
+    auto r = cli.Post("/notice", notice.dump(), "application/json");
     std::cout << "Received notice status " << r.value().status << " body " << r.value().body << std::endl;
     return "accept";
 }
@@ -84,43 +114,7 @@ std::string handle_inspect(httplib::Client& cli, picojson::value data) {
 
 int main(int argc, char** argv) {
 
-    std::cout << "Entered Main!" << std::endl;
-
-    //seed random number generator
-    srand((unsigned)time(0));
-
-    std::cout << "Creating Pitch" << std::endl;
-
-    g_SoccerPitch = new SoccerPitch(684, 341);
-
-    std::cout << "Creating Snapshot" << std::endl;
-    g_MatchReplay = new Snapshot();
-
-    int updates_count = 0;
-
-    std::cout << "Starting Match..." << std::endl;
-    while (!mMatchFinished)
-    {
-        IncrementTime(1);
-
-        //update game states
-        g_SoccerPitch->Update();
-        updates_count++;
-        //Don't take snapshot for every move
-        if (updates_count % SNAPSHOT_RATE == 1 || updates_count == 1)
-        {
-            g_LastSnapshot = g_MatchReplay->AddSnapshot(g_SoccerPitch);
-        }
-    }//end while
-    std::cout << "Match Finished! Writing to file." << std::endl;
-    // write prettified JSON to another file// , std::ios::out | std::ios::binary | std::ios::ate);
-    json raw_data = g_MatchReplay->Snapshots();
-
-    std::ofstream o("matchlog.json");
-    o << std::setw(4) << raw_data << std::endl;
-
-    delete g_SoccerPitch;
-
+    std::cout << "Starting Server..." << std::endl;
 
     std::map<std::string, decltype(&handle_advance)> handlers = {
         {std::string("advance_state"), &handle_advance},

@@ -5,7 +5,7 @@
 #include "2D/Geometry.h"
 //#include "misc/Cgdi.h"
 #include "2D/C2DMatrix.h"
-#include "Goal.h"
+#include "FieldGoal.h"
 #include "Game/Region.h"
 #include "game/EntityFunctionTemplates.h"
 #include "ParamLoader.h"

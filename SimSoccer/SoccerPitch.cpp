@@ -1,6 +1,6 @@
 #include "SoccerPitch.h"
 #include "SoccerBall.h"
-#include "Goal.h"
+#include "FieldGoal.h"
 #include "Game/Region.h"
 #include "2D/Transformations.h"
 #include "2D/Geometry.h"
@@ -32,13 +32,13 @@ SoccerPitch::SoccerPitch(int cx, int cy):m_cxClient(cx),
                 PlayingArea()->Height() / (double)NumRegionsVertical);
 
   //create the goals
-   m_pRedGoal  = new Goal(Vector2D( m_pPlayingArea->Left(), (cy-Prm.GoalWidth)/2),
+   m_pRedGoal  = new FieldGoal(Vector2D( m_pPlayingArea->Left(), (cy-Prm.GoalWidth)/2),
                           Vector2D(m_pPlayingArea->Left(), cy - (cy-Prm.GoalWidth)/2),
                           Vector2D(1,0));
    
 
 
-  m_pBlueGoal = new Goal( Vector2D( m_pPlayingArea->Right(), (cy-Prm.GoalWidth)/2),
+  m_pBlueGoal = new FieldGoal( Vector2D( m_pPlayingArea->Right(), (cy-Prm.GoalWidth)/2),
                           Vector2D(m_pPlayingArea->Right(), cy - (cy-Prm.GoalWidth)/2),
                           Vector2D(-1,0));
 

@@ -21,6 +21,7 @@ make CCX=g++
 
 # Start echo dapp
 echo -n "Starting match-dapp: "
-ROLLUP_HTTP_SERVER_URL="http://127.0.0.1:$ROLLUP_HTTP_SERVER_PORT" \
+export ROLLUP_HTTP_SERVER_URL="http://127.0.0.1:$ROLLUP_HTTP_SERVER_PORT"
+echo "$ROLLUP_HTTP_SERVER_URL"
 cd ./build
 ./matchbackend

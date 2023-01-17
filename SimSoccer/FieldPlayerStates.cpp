@@ -4,7 +4,7 @@
 #include "FieldPlayer.h"
 #include "SteeringBehaviors.h"
 #include "SoccerTeam.h"
-#include "Goal.h"
+#include "FieldGoal.h"
 #include "2D/geometry.h"
 #include "SoccerBall.h"
 #include "ParamLoader.h"

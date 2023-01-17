@@ -40,9 +40,9 @@
     <ClCompile Include="Common\misc\WindowUtils.cpp" />
     <ClCompile Include="Common\Time\CrudeTimer.cpp" />
     <ClCompile Include="Common\Time\PrecisionTimer.cpp" />
+    <ClCompile Include="SimSoccer\FieldGoal.cpp" />
     <ClCompile Include="SimSoccer\FieldPlayer.cpp" />
     <ClCompile Include="SimSoccer\FieldPlayerStates.cpp" />
-    <ClCompile Include="SimSoccer\Goal.cpp" />
     <ClCompile Include="SimSoccer\Goalkeeper.cpp" />
     <ClCompile Include="SimSoccer\GoalKeeperStates.cpp" />
     <ClCompile Include="main.cpp" />
@@ -119,9 +119,9 @@
     <ClInclude Include="Common\Triggers\Trigger_LimitedLifeTime.h" />
     <ClInclude Include="Common\Triggers\Trigger_Respawning.h" />
     <ClInclude Include="SimSoccer\constants.h" />
+    <ClInclude Include="SimSoccer\FieldGoal.h" />
     <ClInclude Include="SimSoccer\FieldPlayer.h" />
     <ClInclude Include="SimSoccer\FieldPlayerStates.h" />
-    <ClInclude Include="SimSoccer\Goal.h" />
     <ClInclude Include="SimSoccer\Goalkeeper.h" />
     <ClInclude Include="SimSoccer\GoalKeeperStates.h" />
     <ClInclude Include="SimSoccer\ParamLoader.h" />
@@ -197,6 +197,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>SimSoccer;Common;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

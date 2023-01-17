@@ -47,9 +47,6 @@
     <ClCompile Include="SimSoccer\FieldPlayerStates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimSoccer\Goal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SimSoccer\Goalkeeper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     <ClCompile Include="Snapshot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SimSoccer\FieldGoal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SimSoccer\SoccerBall.h">
@@ -152,9 +152,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimSoccer\FieldPlayerStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimSoccer\Goal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimSoccer\Goalkeeper.h">
@@ -353,6 +350,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimSoccer\FieldGoal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
