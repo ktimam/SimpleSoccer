@@ -18,24 +18,29 @@
 #include "ParamLoader.h"
 #include "Resource.h"
 
+#include "misc/Snapshot.h"
+
 #include "3rdparty/cpp-httplib/httplib.h"
 #include "3rdparty/picojson/picojson.h"
 
 using json = nlohmann::json;
 
-const int MATCH_DURATION = 90;
+const int MATCH_DURATION = 10;
 const int MATCH_RATE = 6;
 
 const int MILLI_IN_SECOND = 20;
 const int MILLI_IN_MINUTE = 60 * 20;
 const int SECOND_MAX_VALUE = 60;
 
+const bool LOG_MATCH_OUTPUT = true;
 const int SNAPSHOT_RATE = 5;
 
 int mTickCount = 0;
 bool mMatchFinished = false;
 
 SoccerPitch* g_SoccerPitch;
+Snapshot* g_MatchReplay;
+json         g_LastSnapshot;
 
 void IncrementTime(int rate)
 {
@@ -65,29 +70,63 @@ std::string handle_advance(httplib::Client& cli, picojson::value data) {
     std::cout << "payloadstr : " << payloadstr << std::endl;
 
     auto seed = (unsigned)time(0);
+    std::cout << "Seed Generated : " << seed << std::endl;
     //seed random number generator
-    srand(seed);
+    srand(1674374940);// seed);
 
     std::cout << "Creating Pitch" << std::endl;
 
     g_SoccerPitch = new SoccerPitch(684, 341);
 
+    if (LOG_MATCH_OUTPUT)
+    {
+        g_MatchReplay = new Snapshot();
+    }
+
     std::cout << "Starting Match..." << std::endl;
+    mMatchFinished = false;
+    int updates_count = 0;
     while (!mMatchFinished)
     {
         IncrementTime(1);
         //update game states
         g_SoccerPitch->Update();
+
+        if (LOG_MATCH_OUTPUT)
+        {
+            updates_count++;
+            //Don't take snapshot for every move
+            if (updates_count % SNAPSHOT_RATE == 1 || updates_count == 1)
+            {
+                g_LastSnapshot = g_MatchReplay->AddSnapshot(g_SoccerPitch);
+            }
+        }
+    }
+
+    if (LOG_MATCH_OUTPUT)
+    {
+        json raw_data = g_MatchReplay->Snapshots();
+        std::ofstream o("match_server.json");
+        o << std::setw(4) << raw_data << std::endl;
     }
 
     auto score1 = g_SoccerPitch->HomeTeam()->OpponentsGoal()->NumGoalsScored();
     auto score2 = g_SoccerPitch->AwayTeam()->OpponentsGoal()->NumGoalsScored();
+
+    if (LOG_MATCH_OUTPUT)
+    {
+        delete g_MatchReplay;
+    }
+
     delete g_SoccerPitch;
 
     json result;
     result["seed"]   = seed;
     result["score1"] = score1;
     result["score2"] = score2;
+
+    std::cout << "score1 : " << score1 << std::endl;
+    std::cout << "score2 : " << score2 << std::endl;
 
     auto resulthex = to_hex_dump(result.dump());
     auto resultstr = std::string("\"") + std::string(resulthex) + std::string("\"");
@@ -114,7 +153,7 @@ std::string handle_inspect(httplib::Client& cli, picojson::value data) {
 
 int main(int argc, char** argv) {
 
-    std::cout << "Starting Server..." << std::endl;
+    std::cout << "Server Started..." << std::endl;
 
     std::map<std::string, decltype(&handle_advance)> handlers = {
         {std::string("advance_state"), &handle_advance},
@@ -125,12 +164,12 @@ int main(int argc, char** argv) {
     std::string status("accept");
     std::string rollup_address;
     while (true) {
-        std::cout << "Sending finish" << std::endl;
+        //std::cout << "Sending finish" << std::endl;
         auto finish = std::string("{\"status\":\"") + status + std::string("\"}");
         auto r = cli.Post("/finish", finish, "application/json");
-        std::cout << "Received finish status " << r.value().status << std::endl;
+        //std::cout << "Received finish status " << r.value().status << std::endl;
         if (r.value().status == 202) {
-            std::cout << "No pending rollup request, trying again" << std::endl;
+            //std::cout << "No pending rollup request, trying again" << std::endl;
         }
         else {
             picojson::value rollup_request;

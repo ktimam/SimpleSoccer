@@ -146,6 +146,7 @@
     <ClCompile Include="Common\misc\Cgdi.cpp" />
     <ClCompile Include="Common\misc\FrameCounter.cpp" />
     <ClCompile Include="Common\misc\iniFileLoaderBase.cpp" />
+    <ClCompile Include="Common\misc\Snapshot.cpp" />
     <ClCompile Include="Common\Time\CrudeTimer.cpp" />
     <ClCompile Include="Common\Time\PrecisionTimer.cpp" />
     <ClCompile Include="SimSoccerServer.cpp" />
@@ -163,7 +164,6 @@
     <ClCompile Include="SimSoccer\SteeringBehaviors.cpp" />
     <ClCompile Include="SimSoccer\SupportSpotCalculator.cpp" />
     <ClCompile Include="SimSoccer\TeamStates.cpp" />
-    <ClCompile Include="Snapshot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\2D\C2DMatrix.h" />
@@ -213,6 +213,7 @@
     <ClInclude Include="Common\misc\iniFileLoaderBase.h" />
     <ClInclude Include="Common\misc\PriorityQueue.h" />
     <ClInclude Include="Common\misc\Smoother.h" />
+    <ClInclude Include="Common\misc\Snapshot.h" />
     <ClInclude Include="Common\misc\Stream_Utility_Functions.h" />
     <ClInclude Include="Common\misc\TypeToString.h" />
     <ClInclude Include="Common\misc\utils.h" />
@@ -240,7 +241,6 @@
     <ClInclude Include="SimSoccer\SteeringBehaviors.h" />
     <ClInclude Include="SimSoccer\SupportSpotCalculator.h" />
     <ClInclude Include="SimSoccer\TeamStates.h" />
-    <ClInclude Include="Snapshot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Params.ini" />

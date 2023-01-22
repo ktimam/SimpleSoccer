@@ -38,6 +38,8 @@
     <ClCompile Include="Common\misc\FrameCounter.cpp" />
     <ClCompile Include="Common\misc\iniFileLoaderBase.cpp" />
     <ClCompile Include="Common\misc\WindowUtils.cpp" />
+    <ClCompile Include="Common\misc\WinHttpWrapper.cpp" />
+    <ClCompile Include="Common\misc\WinVersion.cpp" />
     <ClCompile Include="Common\Time\CrudeTimer.cpp" />
     <ClCompile Include="Common\Time\PrecisionTimer.cpp" />
     <ClCompile Include="SimSoccer\FieldGoal.cpp" />
@@ -55,7 +57,7 @@
     <ClCompile Include="SimSoccer\SteeringBehaviors.cpp" />
     <ClCompile Include="SimSoccer\SupportSpotCalculator.cpp" />
     <ClCompile Include="SimSoccer\TeamStates.cpp" />
-    <ClCompile Include="Snapshot.cpp" />
+    <ClCompile Include="Common\misc\Snapshot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\2D\C2DMatrix.h" />
@@ -110,6 +112,8 @@
     <ClInclude Include="Common\misc\TypeToString.h" />
     <ClInclude Include="Common\misc\utils.h" />
     <ClInclude Include="Common\misc\WindowUtils.h" />
+    <ClInclude Include="Common\misc\WinHttpWrapper.h" />
+    <ClInclude Include="Common\misc\WinVersion.h" />
     <ClInclude Include="Common\Time\CrudeTimer.h" />
     <ClInclude Include="Common\Time\PrecisionTimer.h" />
     <ClInclude Include="Common\Time\Regulator.h" />
@@ -134,7 +138,7 @@
     <ClInclude Include="SimSoccer\SteeringBehaviors.h" />
     <ClInclude Include="SimSoccer\SupportSpotCalculator.h" />
     <ClInclude Include="SimSoccer\TeamStates.h" />
-    <ClInclude Include="Snapshot.h" />
+    <ClInclude Include="Common\misc\Snapshot.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon1.ico" />

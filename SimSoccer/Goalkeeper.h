@@ -68,6 +68,7 @@ public:
    Vector2D    GetRearInterposeTarget()const;
 
    StateMachine<GoalKeeper>* GetFSM()const{return m_pStateMachine;}
+   std::string GetCurrentStateName()const { return std::string(m_pStateMachine->GetNameOfCurrentState()); }
 
    
    Vector2D    LookAt()const{return m_vLookAt;}

@@ -107,19 +107,25 @@
     <ClCompile Include="Common\misc\iniFileLoaderBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\misc\WindowUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Time\CrudeTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common\Time\PrecisionTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Snapshot.cpp">
+    <ClCompile Include="Common\misc\Snapshot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimSoccer\FieldGoal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\misc\WinHttpWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\misc\WinVersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\misc\WindowUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -319,9 +325,6 @@
     <ClInclude Include="Common\misc\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\misc\WindowUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Time\CrudeTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -346,13 +349,22 @@
     <ClInclude Include="Common\Triggers\TriggerSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snapshot.h">
+    <ClInclude Include="Common\misc\Snapshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\json\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimSoccer\FieldGoal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\misc\WinHttpWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\misc\WinVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\misc\WindowUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -152,6 +152,7 @@ public:
   void                     SetHomeRegion(int NewRegion){m_iHomeRegion = NewRegion;}
   SoccerTeam*const         Team()const{return m_pTeam;}
   
+  virtual std::string GetCurrentStateName()const = 0;
 };
 
 

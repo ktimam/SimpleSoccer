@@ -1,6 +1,7 @@
 #ifndef LINUX
 
 #pragma warning (disable:4786)
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <time.h>
 
@@ -10,33 +11,41 @@
 #include "Game/EntityManager.h"
 #include "SoccerPitch.h"
 #include "SoccerTeam.h"
+#include "PlayerBase.h"
 #include "Goalkeeper.h"
 #include "FieldPlayer.h"
+#include "FieldGoal.h"
 #include "SteeringBehaviors.h"
-#include "Snapshot.h"
+#include "misc/Snapshot.h"
 #include "json/json.hpp"
 #include "misc/Cgdi.h"
 #include "ParamLoader.h"
 #include "Resource.h"
 #include "misc/WindowUtils.h"
 #include "debug/DebugConsole.h"
+#include "misc/WinHttpWrapper.h"
 
+using namespace WinHttpWrapper;
+using namespace std;
 using json = nlohmann::json;
 
 
 //#define SERVER_MODE
 //#define CLIENT_MODE
 #define LIVE_MODE
+//#define CARTESI_MODE
 //--------------------------------- Globals ------------------------------
 //
 //------------------------------------------------------------------------
 
-const int MATCH_DURATION = 90;
+const int MATCH_DURATION = 10;
 const int MATCH_RATE = 6;
 
 const int MILLI_IN_SECOND = 20;
 const int MILLI_IN_MINUTE = 60 * 20;
 const int SECOND_MAX_VALUE = 60;
+
+const bool LOG_MATCH_OUTPUT = true;
 
 const int SNAPSHOT_RATE = 5;
 
@@ -46,9 +55,17 @@ bool mMatchFinished = false;
 const char* g_szApplicationName = "Simple Soccer";
 const char*	g_szWindowClassName = "MyWindowClass";
 
+const wstring CARTESI_API_SERVER_URL = L"localhost";
+int CARTESI_API_SERVER_PORT = 3010;
+bool CARTESI_API_SERVER_HTTPS = false;
+const wstring requestHeader = L"Content-Type: application/json";
+
 SoccerPitch* g_SoccerPitch;
 Snapshot*    g_MatchReplay;
 json         g_LastSnapshot;
+
+int g_FinalScore1 = 0;
+int g_FinalScore2 = 0;
 
 //the vertex buffer
 std::vector<Vector2D>   g_vecPlayerVB;
@@ -198,14 +215,7 @@ bool RenderSoccerPitch()
             if (Prm.bStates)
             {
                 gdi->TextColor(0, 170, 0);
-                if (player->Role() == PlayerBase::goal_keeper)
-                {
-                    gdi->TextAtPos(entity_position.x, entity_position.y - 20, std::string(((GoalKeeper*)player)->GetFSM()->GetNameOfCurrentState()));
-                }
-                else
-                {
-                    gdi->TextAtPos(entity_position.x, entity_position.y - 20, std::string(((FieldPlayer*)player)->GetFSM()->GetNameOfCurrentState()));
-                }
+                gdi->TextAtPos(entity_position.x, entity_position.y - 20, player->GetCurrentStateName());
             }
 
             //show IDs
@@ -243,7 +253,7 @@ bool RenderSoccerPitch()
         }
     }
     gdi->TextColor(Cgdi::black);
-    gdi->TextAtPos((g_SoccerPitch->cxClient() / 2) + 50, g_SoccerPitch->cyClient() - 18, GetCurrentTimeString());
+    gdi->TextAtPos((g_SoccerPitch->cxClient() / 2) - 10, 2, GetCurrentTimeString());
 
 #ifdef LIVE_MODE
     //render the sweet spots
@@ -274,11 +284,11 @@ bool RenderSoccerPitch()
 #endif
 // 
     //show the score
-    /*gdi->TextColor(Cgdi::red);
-    gdi->TextAtPos((g_SoccerPitch->cxClient() /2)-50, g_SoccerPitch->cyClient() -18, "Red: " + ttos(m_pBlueGoal->NumGoalsScored()));
+    gdi->TextColor(Cgdi::red);
+    gdi->TextAtPos((g_SoccerPitch->cxClient() /2)-50, g_SoccerPitch->cyClient() -18, "Red: " + ttos(g_SoccerPitch->HomeTeam()->OpponentsGoal()->NumGoalsScored()));
 
     gdi->TextColor(Cgdi::blue);
-    gdi->TextAtPos((g_SoccerPitch->cxClient() /2)+10, g_SoccerPitch->cyClient() -18, "Blue: " + ttos(m_pRedGoal->NumGoalsScored()));*/
+    gdi->TextAtPos((g_SoccerPitch->cxClient() /2)+10, g_SoccerPitch->cyClient() -18, "Blue: " + ttos(g_SoccerPitch->AwayTeam()->OpponentsGoal()->NumGoalsScored()));
 
     return true;
 }
@@ -320,8 +330,65 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 			   cxClient = rect.right;
 			   cyClient = rect.bottom;
 
+#ifdef CARTESI_MODE
+               HttpRequest req(CARTESI_API_SERVER_URL, CARTESI_API_SERVER_PORT, CARTESI_API_SERVER_HTTPS);
+               HttpResponse response;
+
+               cout << "Action: Cartesi api server - input" << endl;
+               req.Post(L"/api/input",
+                   requestHeader,
+                   R"({"payload":"hello"})",
+                   response);
+               json response_json = json::parse(response.text);
+               int epoch = response_json["epoch_index"];
+               int input = response_json["input_index"];
+               json query_json;
+               query_json["epoch"] = epoch;
+               query_json["input"] = input;
+               string query_text = query_json.dump();
+               cout << "Returned Status:" << response.statusCode << endl;
+               cout << "Content Length:" << response.contentLength << endl << endl;
+               //PrintDictionary(response.GetHeaderDictionary());
+               //wcout << endl << response.header << endl;
+               response.Reset();
+
+               cout << "Action: Cartesi api server - notice" << endl;
+               req.Post(L"/api/notice_list",
+                   requestHeader,
+                   query_text,
+                   response);
+               while (response.text == "[]")
+               {
+                   //Match result not retrieved yet, try again
+                   cout << "Match result not retrieved yet, trying again..." << endl;
+                   response.Reset(); 
+                   Sleep(100);
+                   req.Post(L"/api/notice_list",
+                       requestHeader,
+                       query_text,
+                       response);
+               }
+               json match_json = json::parse(response.text);
+               json::iterator it = match_json.begin();
+               string payload = it.value()["payload"];
+               json payloadjson = json::parse(payload);
+               unsigned seed = payloadjson["seed"];
+               g_FinalScore1 = payloadjson["score1"];
+               g_FinalScore2 = payloadjson["score2"];
+               cout << "Returned Status:" << response.statusCode << endl;
+               cout << "Content Length:" << response.contentLength << endl << endl;
+               //PrintDictionary(response.GetHeaderDictionary());
+               //wcout << endl << response.header << endl;
+               response.Reset();
+
+               std::cout << "Using Seed : " << seed << std::endl;
+               std::cout << "FinalScore1 : " << g_FinalScore1 << std::endl;
+               std::cout << "FinalScore2 : " << g_FinalScore2 << std::endl;
+               srand(1674374940);// seed);
+#else
          //seed random number generator
-         srand(2000);// (unsigned)time(0));
+         srand((unsigned)time(0));
+#endif
 
          
          //---------------create a surface to render to(backbuffer)
@@ -557,6 +624,9 @@ int WINAPI WinMain (HINSTANCE hInstance,
                     LPSTR     szCmdLine, 
                     int       iCmdShow)
 {
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
 
   //handle to our window
   HWND						hWnd;
@@ -678,18 +748,35 @@ int WINAPI WinMain (HINSTANCE hInstance,
           }
       }
 
-      while (!timer.ReadyForNextFrame() && msg.message != WM_QUIT)
+      /*while (!timer.ReadyForNextFrame() && msg.message != WM_QUIT)
       {
           Sleep(2);
-      }
+      }*/
       //update game states
 #ifdef CLIENT_MODE
       IncrementTime(SNAPSHOT_RATE);
       g_LastSnapshot = (*it);
 #else
-      IncrementTime(1);
-      g_SoccerPitch->Update();
-      g_LastSnapshot = g_MatchReplay->AddSnapshot(g_SoccerPitch);
+      if (!mMatchFinished)
+      {
+          IncrementTime(1);
+          g_SoccerPitch->Update();
+          if (LOG_MATCH_OUTPUT)
+          {
+            updates_count++;
+            //Don't take snapshot for every move
+            if (updates_count % SNAPSHOT_RATE == 1 || updates_count == 1)
+            {
+                g_LastSnapshot = g_MatchReplay->AddSnapshot(g_SoccerPitch);
+            }
+            if (mMatchFinished)
+            {
+              json raw_data = g_MatchReplay->Snapshots();
+              std::ofstream o("match_client.json");
+              o << std::setw(4) << raw_data << std::endl;
+            }
+          }
+      }
 #endif // LIVE_MODE
 
       //render 

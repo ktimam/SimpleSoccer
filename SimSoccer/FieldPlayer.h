@@ -66,6 +66,7 @@ public:
   bool        HandleMessage(const Telegram& msg);
 
   StateMachine<FieldPlayer>* GetFSM()const{return m_pStateMachine;}
+  std::string GetCurrentStateName()const { return std::string(m_pStateMachine->GetNameOfCurrentState()); }
 
   bool        isReadyForNextKick()const { return true;/*m_pKickLimiter->isReady();*/ }
 
