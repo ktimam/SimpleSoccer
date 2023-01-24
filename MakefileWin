@@ -1,7 +1,7 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
-TARGET_EXEC := matchbackend
+TARGET_EXEC := matchfrontend
 
-BUILD_DIR := ./build
+BUILD_DIR := ./build2
 SRC_DIRS := ./src
 
 #COPY_FILES = $(BUILD_DIR)/Params.ini
@@ -26,12 +26,12 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
 SOFTFLOATFLAGS := -msoft-float
-CPPFLAGS := $(INC_FLAGS) $(SOFTFLOATFLAGS) -MMD -MP  -D LINUX
+CPPFLAGS := $(INC_FLAGS) $(SOFTFLOATFLAGS) -MMD -MP -D WINDOWS
 
 # The final build step.
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	tr -d '\15\32' < Params.ini > $(BUILD_DIR)/Params.ini
-	$(CXX) $(OBJS) -lstdc++ -lm $(SOFTFLOATFLAGS) -o $@ $(LDFLAGS)
+	$(CXX) $(OBJS) -lWinhttp -lntdll -lwinmm -mwindows -lgdi32 $(SOFTFLOATFLAGS) -o $@ $(LDFLAGS)
 
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c
@@ -41,7 +41,6 @@ $(BUILD_DIR)/%.c.o: %.c
 # Build step for C++ source
 $(BUILD_DIR)/%.cpp.o: %.cpp
 	mkdir -p $(dir $@)
-	$(CXX) -v
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 #copy ini files (not working)

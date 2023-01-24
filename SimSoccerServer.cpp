@@ -1,5 +1,6 @@
 // SimSoccerServer.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#ifndef WINDOWS
 
 #include <stdio.h>
 #include <iostream>
@@ -74,9 +75,9 @@ std::string handle_advance(httplib::Client& cli, picojson::value data) {
     //seed random number generator
     srand(1674374940);// seed);
 
-    std::cout << "Creating Pitch" << std::endl;
+    std::cout << "Creating Pitch..." << std::endl;
 
-    g_SoccerPitch = new SoccerPitch(684, 341);
+    g_SoccerPitch = new SoccerPitch(WindowWidth, WindowHeight);
 
     if (LOG_MATCH_OUTPUT)
     {
@@ -189,3 +190,5 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
+
+#endif

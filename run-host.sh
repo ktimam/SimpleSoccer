@@ -17,7 +17,7 @@ ROLLUP_HTTP_SERVER_PORT=5004
 
 # Rebuild echo dapp
 echo -n "Rebuilding match-dapp: "
-make CCX=g++
+make CXX=gcc-12
 
 # Start echo dapp
 echo -n "Starting match-dapp: "

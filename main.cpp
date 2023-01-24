@@ -3,7 +3,7 @@
 #pragma warning (disable:4786)
 #define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
-#include <time.h>
+//#include <time.h>
 
 #include "constants.h"
 #include "misc/utils.h"
@@ -33,7 +33,7 @@ using json = nlohmann::json;
 //#define SERVER_MODE
 //#define CLIENT_MODE
 #define LIVE_MODE
-//#define CARTESI_MODE
+#define CARTESI_MODE
 //--------------------------------- Globals ------------------------------
 //
 //------------------------------------------------------------------------
@@ -410,7 +410,7 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
          //don't forget to release the DC
          ReleaseDC(hwnd, hdc); 
          
-         g_SoccerPitch = new SoccerPitch(cxClient, cyClient);
+         g_SoccerPitch = new SoccerPitch(WindowWidth, WindowHeight);
          g_MatchReplay = new Snapshot();
          //setup the vertex buffers and calculate the bounding radius
          const int NumPlayerVerts = 4;
@@ -664,8 +664,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
                          WS_OVERLAPPED | WS_VISIBLE | WS_CAPTION | WS_SYSMENU,
                          GetSystemMetrics(SM_CXSCREEN)/2 - WindowWidth/2,
                          GetSystemMetrics(SM_CYSCREEN)/2 - WindowHeight/2,                    
-                         WindowWidth,     // initial x size
-                         WindowHeight,    // initial y size
+                         WindowWidth + 10,     // initial x size
+                         WindowHeight + 70,    // initial y size
                          NULL,                 // parent window handle
                          NULL,                 // window menu handle
                          hInstance,            // program instance handle
