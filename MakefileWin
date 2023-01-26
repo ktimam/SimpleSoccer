@@ -25,13 +25,13 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-SOFTFLOATFLAGS := -msoft-float
+SOFTFLOATFLAGS := -msoft-float -m64 -lsoft-fp -L.
 CPPFLAGS := $(INC_FLAGS) $(SOFTFLOATFLAGS) -MMD -MP -D WINDOWS
 
 # The final build step.
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	tr -d '\15\32' < Params.ini > $(BUILD_DIR)/Params.ini
-	$(CXX) $(OBJS) -lWinhttp -lntdll -lwinmm -mwindows -lgdi32 $(SOFTFLOATFLAGS) -o $@ $(LDFLAGS)
+	$(CXX) $(OBJS) $(SOFTFLOATFLAGS) -lWinhttp -lntdll -lwinmm -mwindows -lgdi32 -o $@ $(LDFLAGS)
 
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c

@@ -25,7 +25,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-SOFTFLOATFLAGS := -msoft-float
+SOFTFLOATFLAGS := -msoft-float -m64 -lsoft-fp -L.
 CPPFLAGS := $(INC_FLAGS) $(SOFTFLOATFLAGS) -MMD -MP  -D LINUX
 
 # The final build step.
